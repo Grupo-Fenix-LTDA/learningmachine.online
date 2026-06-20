@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPL Distribuidora — Peças e Acessórios Automotivos</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--primary:#1a3a5c;
+--primary-light:#2a5a8c;
+--accent:#e8a830;
+--dark:#1a1a2e;
+--light:#f5f7fa;
+--gray:#6b7280;
+--white:#ffffff;
+}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:#333;line-height:1.7}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{background:var(--primary);padding:0 5%;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px}
+.nav-logo{color:var(--white);font-size:1.5rem;font-weight:700;letter-spacing:.5px}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.85);font-size:.95rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.nav-toggle span{width:24px;height:2px;background:var(--white);border-radius:2px;transition:transform .3s}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:var(--white);padding:100px 5% 90px;text-align:center}
+.hero h1{font-size:2.8rem;font-weight:800;margin-bottom:16px;line-height:1.2}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:1.15rem;max-width:650px;margin:0 auto 32px;opacity:.9;line-height:1.8}
+.hero-btn{display:inline-block;background:var(--accent);color:var(--dark);padding:14px 36px;border-radius:8px;font-weight:700;font-size:1rem;transition:transform .2s,box-shadow .2s}
+.hero-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,168,48,.4)}
+
+/* SECTIONS */
+section{padding:80px 5%}
+.section-title{text-align:center;margin-bottom:50px}
+.section-title h2{font-size:2rem;color:var(--primary);font-weight:700;margin-bottom:10px}
+.section-title p{color:var(--gray);max-width:550px;margin:0 auto;font-size:1.05rem}
+
+/* ABOUT */
+.about-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.about-text h3{font-size:1.4rem;color:var(--primary);margin-bottom:14px;font-weight:700}
+.about-text p{color:#555;margin-bottom:16px}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.stat-card{background:var(--light);padding:20px;border-radius:10px;text-align:center}
+.stat-card .number{font-size:1.8rem;font-weight:800;color:var(--primary)}
+.stat-card .label{font-size:.85rem;color:var(--gray);margin-top:4px}
+.about-image{background:linear-gradient(135deg,var(--primary-light),var(--primary));border-radius:16px;height:360px;display:flex;align-items:center;justify-content:center}
+.about-image svg{width:120px;height:120px;opacity:.25}
+
+/* SERVICES */
+.services-bg{background:var(--light)}
+.services-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.service-card{background:var(--white);padding:36px 28px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-top:3px solid transparent}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.1);border-top-color:var(--accent)}
+.service-icon{width:52px;height:52px;background:rgba(26,58,92,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.service-icon svg{width:26px;height:26px;stroke:var(--primary);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.service-card h3{font-size:1.1rem;color:var(--primary);margin-bottom:10px;font-weight:700}
+.service-card p{color:var(--gray);font-size:.93rem;line-height:1.7}
+
+/* TESTIMONIALS */
+.testimonials-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.testimonial{background:var(--white);padding:30px 24px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:3px solid var(--accent)}
+.testimonial p{color:#555;font-size:.95rem;font-style:italic;margin-bottom:16px;line-height:1.7}
+.testimonial .author{font-weight:700;color:var(--primary);font-size:.9rem}
+.testimonial .role{color:var(--gray);font-size:.82rem}
+
+/* CONTACT */
+.contact-bg{background:var(--light)}
+.contact-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-item{display:flex;align-items:flex-start;gap:14px}
+.contact-item .icon{width:44px;height:44px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-item .icon svg{width:20px;height:20px;stroke:var(--white);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.contact-item h4{font-size:.95rem;color:var(--primary);margin-bottom:4px}
+.contact-item p{color:var(--gray);font-size:.9rem}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.contact-form input,.contact-form textarea{padding:14px 16px;border:1px solid #dde1e7;border-radius:8px;font-size:.95rem;font-family:inherit;transition:border-color .2s;outline:none;width:100%}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--primary)}
+.contact-form textarea{height:120px;resize:vertical}
+.contact-form button{background:var(--primary);color:var(--white);padding:14px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s}
+.contact-form button:hover{background:var(--primary-light)}
+
+/* FOOTER */
+.footer{background:var(--dark);color:rgba(255,255,255,.7);padding:50px 5% 30px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.footer-brand h3{color:var(--white);font-size:1.3rem;margin-bottom:12px}
+.footer-brand h3 span{color:var(--accent)}
+.footer-brand p{font-size:.88rem;line-height:1.8}
+.footer-col h4{color:var(--white);font-size:.95rem;margin-bottom:14px;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col a{font-size:.88rem;transition:color .2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-legal{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:.82rem;line-height:2}
+.footer-legal p{margin-bottom:2px}
+.footer-copyright{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);font-size:.82rem}
+
+/* POLICY PAGES (hidden by default) */
+.policy-page{display:none;padding:100px 5% 60px;max-width:900px;margin:0 auto}
+.policy-page.active{display:block}
+.policy-page h1{font-size:2rem;color:var(--primary);margin-bottom:24px}
+.policy-page h2{font-size:1.3rem;color:var(--primary);margin:28px 0 12px}
+.policy-page p,.policy-page li{color:#555;font-size:.95rem;line-height:1.8;margin-bottom:10px}
+.policy-page ul{padding-left:24px;margin-bottom:16px}
+.back-link{display:inline-block;margin-bottom:24px;color:var(--primary);font-weight:600;font-size:.95rem}
+.back-link:hover{color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:var(--primary);flex-direction:column;padding:20px 5%;gap:16px}
+.nav-links.open{display:flex}
+.nav-toggle{display:flex}
+.hero h1{font-size:2rem}
+.hero{padding:70px 5% 60px}
+.about-grid,.contact-grid{grid-template-columns:1fr}
+.about-image{height:240px}
+.services-grid{grid-template-columns:1fr}
+.testimonials-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+<div class="nav-inner">
+<a href="#" class="nav-logo" onclick="showHome()">PPL <span>Distribuidora</span></a>
+<ul class="nav-links" id="navLinks">
+<li><a href="#sobre" onclick="showHome()">Sobre</a></li>
+<li><a href="#servicos" onclick="showHome()">Serviços</a></li>
+<li><a href="#depoimentos" onclick="showHome()">Depoimentos</a></li>
+<li><a href="#contato" onclick="showHome()">Contato</a></li>
+</ul>
+<button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+
+<!-- HERO -->
+<section class="hero">
+<h1>PPL <span>Distribuidora</span></h1>
+<p>Distribuição de peças e acessórios automotivos para oficinas, lojas de autopeças e profissionais do setor em todo o Brasil.</p>
+<a href="#contato" class="hero-btn">Fale Conosco</a>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre" style="padding-top:80px">
+<div class="section-title">
+<h2>Sobre a PPL Distribuidora</h2>
+<p>Tradição e confiança no mercado de autopeças desde 1989.</p>
+</div>
+<div class="about-grid">
+<div class="about-text">
+<h3>Mais de 35 anos de experiência</h3>
+<p>A PPL Distribuidora de Peças atua no comércio atacadista de peças e acessórios novos para veículos automotores. Com sede em Goiânia/GO, atendemos oficinas mecânicas, lojas de autopeças e profissionais do setor automotivo em diversas regiões do país.</p>
+<p>Nossa operação é fundamentada em um catálogo abrangente, logística eficiente e atendimento especializado, garantindo que nossos clientes encontrem as peças certas com agilidade e segurança.</p>
+<div class="about-stats">
+<div class="stat-card"><div class="number">35+</div><div class="label">Anos de mercado</div></div>
+<div class="stat-card"><div class="number">GO</div><div class="label">Sede em Goiânia</div></div>
+</div>
+</div>
+<div class="about-image">
+<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+</div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicos" class="services-bg">
+<div class="section-title">
+<h2>Nossos Serviços</h2>
+<p>Soluções completas em distribuição de autopeças.</p>
+</div>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+<h3>Distribuição Atacadista</h3>
+<p>Fornecimento de peças e acessórios novos para veículos automotores em grandes volumes, com condições especiais para revendedores e oficinas.</p>
+</div>
+<div class="service-card">
+<div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+<h3>Catálogo Especializado</h3>
+<p>Ampla variedade de peças e acessórios compatíveis com as principais marcas e modelos do mercado nacional e importado.</p>
+</div>
+<div class="service-card">
+<div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+<h3>Atendimento Especializado</h3>
+<p>Equipe técnica preparada para auxiliar na identificação e seleção das peças adequadas para cada aplicação.</p>
+</div>
+<div class="service-card">
+<div class="service-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+<h3>Logística Eficiente</h3>
+<p>Estrutura logística organizada para entregas ágeis, atendendo demandas com pontualidade e cuidado no manuseio das peças.</p>
+</div>
+<div class="service-card">
+<div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<h3>Peças com Procedência</h3>
+<p>Trabalhamos exclusivamente com peças novas e de procedência verificada, assegurando qualidade e confiabilidade para nossos clientes.</p>
+</div>
+<div class="service-card">
+<div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+<h3>Condições Comerciais</h3>
+<p>Políticas comerciais flexíveis, com opções de pagamento e condições diferenciadas para parceiros recorrentes.</p>
+</div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="depoimentos">
+<div class="section-title">
+<h2>O que dizem nossos clientes</h2>
+<p>A confiança de quem trabalha conosco.</p>
+</div>
+<div class="testimonials-grid">
+<div class="testimonial">
+<p>"Trabalho com a PPL há vários anos. A variedade do catálogo e a agilidade nas entregas fazem toda a diferença no dia a dia da oficina."</p>
+<div class="author">Carlos M.</div>
+<div class="role">Proprietário de Oficina Mecânica</div>
+</div>
+<div class="testimonial">
+<p>"Atendimento sempre atencioso e profissional. Quando preciso de uma peça específica, a equipe ajuda a localizar rapidamente."</p>
+<div class="author">Fernanda R.</div>
+<div class="role">Gerente de Loja de Autopeças</div>
+</div>
+<div class="testimonial">
+<p>"Parceria sólida e confiável. As condições comerciais são justas e a qualidade das peças nunca nos deixou na mão."</p>
+<div class="author">Roberto S.</div>
+<div class="role">Mecânico Automotivo</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato" class="contact-bg">
+<div class="section-title">
+<h2>Entre em Contato</h2>
+<p>Estamos prontos para atender você.</p>
+</div>
+<div class="contact-grid">
+<div class="contact-info">
+<div class="contact-item">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+<div><h4>Endereço</h4><p>R. dos Missionários, 1402, QD 29-A LT 3/20 Sala 1/2<br>Rodoviário, Goiânia/GO — CEP 74.430-360</p></div>
+</div>
+<div class="contact-item">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+<div><h4>Telefone</h4><p>(62) 3272-2050<br>(62) 3219-5500</p></div>
+</div>
+<div class="contact-item">
+<div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+<div><h4>E-mail</h4><p>jefferson@ppl.com.br</p></div>
+</div>
+</div>
+<div class="contact-form">
+<input type="text" placeholder="Seu nome">
+<input type="email" placeholder="Seu e-mail">
+<input type="text" placeholder="Assunto">
+<textarea placeholder="Sua mensagem"></textarea>
+<button type="button">Enviar Mensagem</button>
+</div>
+</div>
+</section>
+
+</div><!-- /mainContent -->
+
+<!-- PRIVACY POLICY PAGE -->
+<div id="privacyPage" class="policy-page">
+<a href="#" class="back-link" onclick="showHome()">&larr; Voltar ao site</a>
+<h1>Política de Privacidade</h1>
+<p><strong>Última atualização:</strong> Junho de 2026</p>
+
+<h2>1. Identificação do Responsável</h2>
+<p>A presente Política de Privacidade é de responsabilidade da <strong>PPL Distribuidora de Peças Ltda</strong>, inscrita no CNPJ sob o n.º 25.127.614/0001-60, com sede na R. dos Missionários, 1402, QD 29-A LT 3/20 Sala 1/2, Rodoviário, Goiânia/GO, CEP 74.430-360.</p>
+
+<h2>2. Dados Coletados</h2>
+<p>Podemos coletar os seguintes dados pessoais quando você interage conosco:</p>
+<ul>
+<li>Nome completo</li>
+<li>Endereço de e-mail</li>
+<li>Número de telefone</li>
+<li>Endereço comercial</li>
+<li>Dados de navegação (cookies, endereço IP)</li>
+</ul>
+
+<h2>3. Finalidade da Coleta</h2>
+<p>Os dados coletados são utilizados exclusivamente para:</p>
+<ul>
+<li>Atendimento a solicitações e orçamentos</li>
+<li>Comunicação sobre produtos e serviços</li>
+<li>Cumprimento de obrigações legais e regulatórias</li>
+<li>Melhoria dos nossos serviços e experiência do usuário</li>
+</ul>
+
+<h2>4. Compartilhamento de Dados</h2>
+<p>Não compartilhamos, vendemos ou transferimos dados pessoais a terceiros, exceto quando necessário para o cumprimento de obrigações legais ou mediante consentimento expresso do titular.</p>
+
+<h2>5. Segurança</h2>
+<p>Adotamos medidas técnicas e organizacionais adequadas para proteger os dados pessoais contra acesso não autorizado, alteração, divulgação ou destruição. O acesso aos dados é restrito a colaboradores autorizados.</p>
+
+<h2>6. Direitos do Titular</h2>
+<p>Conforme a Lei Geral de Proteção de Dados (LGPD — Lei n.º 13.709/2018), você tem direito a:</p>
+<ul>
+<li>Confirmar a existência de tratamento de seus dados</li>
+<li>Acessar, corrigir ou solicitar a exclusão dos seus dados</li>
+<li>Revogar consentimento a qualquer momento</li>
+<li>Solicitar informações sobre o compartilhamento de dados</li>
+</ul>
+
+<h2>7. Contato</h2>
+<p>Para exercer seus direitos ou esclarecer dúvidas, entre em contato pelo e-mail <strong>jefferson@ppl.com.br</strong> ou pelo telefone <strong>(62) 3272-2050</strong>.</p>
+</div>
+
+<!-- TERMS PAGE -->
+<div id="termsPage" class="policy-page">
+<a href="#" class="back-link" onclick="showHome()">&larr; Voltar ao site</a>
+<h1>Termos de Uso</h1>
+<p><strong>Última atualização:</strong> Junho de 2026</p>
+
+<h2>1. Identificação</h2>
+<p>Este site é de propriedade e operado pela <strong>PPL Distribuidora de Peças Ltda</strong>, inscrita no CNPJ sob o n.º 25.127.614/0001-60, com sede na R. dos Missionários, 1402, QD 29-A LT 3/20 Sala 1/2, Rodoviário, Goiânia/GO, CEP 74.430-360.</p>
+
+<h2>2. Aceitação dos Termos</h2>
+<p>Ao acessar e utilizar este site, você concorda com os presentes Termos de Uso. Caso não concorde com alguma disposição, solicitamos que não utilize o site.</p>
+
+<h2>3. Uso do Site</h2>
+<p>Este site tem caráter institucional e informativo, destinado a apresentar os serviços e produtos oferecidos pela PPL Distribuidora. O conteúdo disponibilizado não constitui oferta vinculante, e as condições comerciais devem ser confirmadas diretamente com nossa equipe.</p>
+
+<h2>4. Propriedade Intelectual</h2>
+<p>Todo o conteúdo deste site, incluindo textos, imagens, logotipos e elementos gráficos, é de propriedade da PPL Distribuidora de Peças Ltda ou utilizado com devida autorização. A reprodução sem consentimento prévio é proibida.</p>
+
+<h2>5. Limitação de Responsabilidade</h2>
+<p>A PPL Distribuidora se esforça para manter as informações do site atualizadas e precisas, mas não garante a ausência de erros ou omissões. Não nos responsabilizamos por decisões tomadas com base exclusivamente nas informações aqui apresentadas.</p>
+
+<h2>6. Legislação Aplicável</h2>
+<p>Estes termos são regidos pelas leis da República Federativa do Brasil. Qualquer litígio será submetido ao foro da comarca de Goiânia/GO.</p>
+
+<h2>7. Contato</h2>
+<p>Para dúvidas sobre estes termos, entre em contato pelo e-mail <strong>jefferson@ppl.com.br</strong> ou pelo telefone <strong>(62) 3272-2050</strong>.</p>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<h3>PPL <span>Distribuidora</span></h3>
+<p>Distribuição de peças e acessórios novos para veículos automotores. Atendendo oficinas e profissionais do setor automotivo desde 1989.</p>
+</div>
+<div class="footer-col">
+<h4>Navegação</h4>
+<ul>
+<li><a href="#sobre" onclick="showHome()">Sobre</a></li>
+<li><a href="#servicos" onclick="showHome()">Serviços</a></li>
+<li><a href="#depoimentos" onclick="showHome()">Depoimentos</a></li>
+<li><a href="#contato" onclick="showHome()">Contato</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Legal</h4>
+<ul>
+<li><a href="#" onclick="showPage('privacyPage')">Política de Privacidade</a></li>
+<li><a href="#" onclick="showPage('termsPage')">Termos de Uso</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-legal">
+<p><strong>PPL DISTRIBUIDORA DE PECAS LTDA</strong></p>
+<p>CNPJ: 25.127.614/0001-60</p>
+<p>R. dos Missionários, 1402, QD 29-A LT 3/20 Sala 1/2 — Rodoviário, Goiânia/GO — CEP 74.430-360</p>
+<p>Telefone: (62) 3272-2050 / (62) 3219-5500 | E-mail: jefferson@ppl.com.br</p>
+</div>
+<div class="footer-copyright">
+<p>&copy; 2026 PPL Distribuidora de Peças Ltda — Todos os direitos reservados</p>
+</div>
+</div>
+</footer>
+
+<script>
+function showPage(pageId){
+document.getElementById('mainContent').style.display='none';
+document.querySelectorAll('.policy-page').forEach(p=>p.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+window.scrollTo(0,0);
+}
+function showHome(){
+document.querySelectorAll('.policy-page').forEach(p=>p.classList.remove('active'));
+document.getElementById('mainContent').style.display='block';
+document.getElementById('navLinks').classList.remove('open');
+}
+</script>
+</body>
+</html>
